@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模板服用</title>
+    <script src="../js/attTemplate.js"></script>
+</head>
+<body>
+    <div id="cont"></div>
+
+    <script type="text/html" id="son">
+    <!-- // 编辑子模板 -->
+    <ul>
+        {{each list val }}
+        <li>
+            <span>{{val}}</span>
+        </li>
+        {{/each}}
+    </ul>
+    </script>
+    <script type="text/html" id="temp">
+        <!-- // 编辑父模板 -->
+        <div>
+            <h2>第一个子模板</h2>
+            {{include 'son' a}}
+        </div>
+        <div>
+            <h2>第一个子模板</h2>
+            {{include 'son' b}}
+        </div>
+    </script>
+    <script>
+        let data = {
+				a: {
+					list: ['娱乐','科技','数码','汽车','生活','美女']
+				},
+				b: {
+					list: ['篮球','足球','排球','棒球','网球','台球']
+				}
+				
+            }
+            let myhtml = template("temp",data);
+            document.querySelector("#cont").innerHTML=myhtml;
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="./lib/require.js" data-main="./lib/main"></script>
+	</head>
+	<body>
+		<!--
+			1.在index.html文件引入require.js,并指定入口文件main(可省略.js后缀)
+			
+			2.定义模块
+				define(["依赖的模块1","依赖的模块2"],function(b1,b2){	//如果不需要依赖其他模块,则可省略[]
+					var myName = "小蓝";
+					return myName;
+				})
+			
+			3.到main.js文件对require进行配置
+				require.config({	--参数接收一个对象
+					baseUrl: "./lib",	--指定基础路径(后面引入的模块都是基于这个路径引入)
+					path: {			--配置引入模块的路径(对象)--对象的key是模块名称,value是模块路径
+						moduleA: "./js/a",	--moduleA是模块名称, a是基于baseUrl的路径(必须省略.js后缀)
+					}
+				})
+			
+			4. main.js文件对模块进行引用
+				require(["引入的模块名1","引入的模块名2"],function(a1,a2){	//a1和a2分别对应引入的模块
+					
+				})
+				
+		-->
+	</body>
+</html>

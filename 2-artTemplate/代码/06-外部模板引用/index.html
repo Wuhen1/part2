@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery3.4.0.js"></script>
+		<script type="text/javascript" src="../js/artTemplate.js"></script>
+	</head>
+	<body>
+		<div id="container"></div>
+		
+		<script type="text/javascript">
+			let data = {
+				films: [
+					{name: "复联4", nation: "美国", actors: [{name: "克里斯·埃文斯"},{name: "布丽·拉尔森"},{name: "克里斯·海姆斯沃斯"}]},
+					{name: "何以为家", nation: "黎巴嫩,法国,美国", actors: [{name: "娜丁·拉巴基"},{name: "赞恩·阿尔·拉菲亚"},{name: "博鲁瓦蒂夫·特雷杰·班科尔"}]},
+					{name: "雪暴", nation: "中国大陆", actors: [{name: "倪妮"},{name: "张震"},{name: "廖凡"}]},
+					{name: "天上再见", nation: "法国,加拿大", actors: [{name: " 罗兰·拉斐特"},{name: "阿尔贝·杜邦泰尔"},{name: "艾米莉·德奎恩"}]},
+					{name: "一个母亲的复仇", nation: "印度", actors: [{name: "拉维·德耶瓦尔"},{name: "希里黛玉"},{name: "阿克夏耶·坎纳"}]}
+				]
+			};
+			$.get("temp.html",function(html){	//function是回调函数(参数接收的是模板文件里面的内容)
+				let render = template.compile(html);	//将源代码编译成函数(render是一个函数)
+				console.log(render);
+				let myContent = render(data);	//传实际参数
+				console.log(myContent);
+				document.getElementById("container").innerHTML = myContent;
+				cument.querySelector("#container").innerHTML =myContent;
+			})
+		</script>
+	</body>
+</html>
