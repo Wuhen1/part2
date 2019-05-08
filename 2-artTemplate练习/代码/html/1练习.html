@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>basisRender</title>
+    <script src="../js/attTemplate.js"></script>
+</head>
+<body>
+    <div id="cont"></div>
+    <script type="text/html" id="temp">
+        <h3>{{title}}</h3>
+        <p>{{msg}}</p>
+        <p>{{myTag}}</p>
+        <p>{{@myTag}}</p>
+    </script>
+    <script>
+        let data ={
+
+            title:"basisRender",
+
+            msg:"你好",
+
+            myTag: "<span>This is span tag.</span>"
+
+        }
+
+        let myhtml=template("temp",data);
+console.log(myhtml)
+        document.querySelector("#cont").innerHTML=myhtml;
+    </script>
+</body>
+</html>

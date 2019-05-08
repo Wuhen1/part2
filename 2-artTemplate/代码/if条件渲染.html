@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./js/artTemplate.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="container"></div>
+		
+		<script type="text/html" id="temp">
+			{{if status==200}}
+			<h3>成功</h3>
+			{{else if status==404}}
+			<h3>找不到页面</h3>
+			{{else}}
+			<h3>请联系管理员</h3>
+			{{/if}}
+			
+			<!-- 嵌套条件判断 -->
+			{{if readyState==4}}
+				{{if status==200}}
+				<p>请求成功</p>
+				{{else if status==404}}
+				<p>找不到页面</p>
+				{{else}}
+				<p>请联系管理员</p>
+				{{/if}}
+			{{else if readyState==3}}
+			<p>请求已发送完成</p>
+			{{else}}
+			<p>请求还没开始</p>
+			{{/if}}
+		</script>
+		
+		<script type="text/javascript">
+			
+			let data = {
+				status: 200,
+				readyState: 2
+			}
+			
+			let myHtml = template("temp",data);
+			
+			document.getElementById("container").innerHTML = myHtml;
+			
+			
+		</script>
+	</body>
+</html>

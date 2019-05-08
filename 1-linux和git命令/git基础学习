@@ -1,0 +1,187 @@
+1.版本管理三种方式
+	1.原始的版本控制(对整个项目的源文件进行拷贝)
+		-. 空间浪费
+		-. 无法进行协作开发
+		-. 版本定位麻烦
+	2.集中式版本控制器  SVN
+	3.分布式版本控制器  git
+
+步骤:
+	1. 安装gitbash
+	
+	2. 配置全局账号
+		git config --global user.name "Your Name"
+		git config --global user.email "email@example.com"
+		
+	3. 新建一个目录
+		mkdir myProject
+		
+	4. 在该目录下新建文件
+		cd  myProject & touch README.txt
+		
+	5. 编辑README.txt文件
+		vi README.txt
+		insert进行编辑
+		按esc退出编辑状态
+		:wq进行保存并退出
+	
+	6. 预览文件
+		cat README.txt
+	
+	7. 初始化项目
+		git init
+		
+	8. 将更改的文件添加到暂存区(常用)
+		git add README.txt
+		
+	9.	将暂存区的文件提交到本地仓库(常用)
+		git commit -m "提交描述"
+		
+	10. 更改文件内容
+		vi README.txt
+		
+	11. 查看更改内容(查看区别)
+		git diff
+	
+	重复8,9
+	
+	12. 查看提交日志
+		git log
+		
+	13. 版本回退(HEAD是当前版本, HEAD^上一个版本, HEAD^^上上一个版本,  HEAD~100上100个版本)
+		git reset --hard HEAD^
+
+	14. 版本回归
+		git reset --hard 指纹信息(前几位)
+	
+	15. 查看历史命令(可以根据指纹信息任意回退版本)
+		git reflog
+		
+	16. 配置SSH加密(因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的)
+		ssh-keygen -t rsa -C "youremail@example.com"
+		Enter file in which to save the key (/c/Users/Administrator.USER-20180527MG/.ssh/id_rsa):输入密钥存放路径(默认即可)
+		Enter passphrase (empty for no passphrase):输入密码: 
+		Enter same passphrase again:再次输入密码
+		[
+			a.配置成功之后, 去对应文件夹找.ssh/id_rsa.pub;
+			b.github设置SSH:
+				个人中心--setting设置--SSH and GPG keys--New SSH key--随便输入一个title--将步骤a的文件内容粘贴到Key)
+		]
+	
+	17. github新建一个仓库
+	
+	18.	与远程仓库关联(常用)
+		git remote add origin https://github.com/Yuki2D/learnGit.git
+		
+	19. 将本地仓库的内容推送到远程仓库(第一次需要添加参数-u)(常用)
+		git push origin master
+		
+	20. 创建分支(参数-b是创建并切换)
+		git checkout -b dev
+		
+	21. 在dev分支里面添加和提交
+		重复8,9
+	
+	22. 切换分支回主干
+		git checkout master
+	
+	23. 将dev分支合并到master主干
+		git merge dev
+		
+	24. 干掉dev分支
+		git branch -d dev
+		
+	25. 将更新的内容push到远程仓库
+		git push origin master
+		
+
+2.git基础知识
+	1.安装git
+3.git基础
+	git的三种状态:
+		1.已修改 modified
+		2.已暂存 staged
+		3.已提交 committed
+	git的三个区域:
+		1.工作目录 (代码编写的目录) working area
+		2.暂存区域 staging area
+		3.git 仓库
+		
+4.git管理项目
+	1.进入到要管理的项目 
+		cd 项目名称
+	2.执行git init 初始化git仓库
+	3.监听文件 git add index.html
+	4.提交 git commit -m "提交描述"
+
+	5.查看状态
+		git status
+5.将某些被监听的文件从暂存区域中删除,但是不删除文件本身
+	git rm -r --cached 要删除的文件
+	git rm -r --cached	xxx.js
+6.忽略某些无需被git监听的文件
+	创建 .gitignore文件,在该文件输入需要被忽略的文件
+
+7.查看历史版本信息
+	git log
+	commit 7931adefeeb96393efcaaf1b2e2c03c6cb55ed70 版本的指纹信息
+	Author: zmt <mengtuo@outlook.com> 提交者姓名和邮箱
+	Date:   Mon Jan 22 16:14:21 2018 +0800 上传日期
+
+	简化版本信息,只提供 版本的指纹信息和提交的描述
+		git log --pretty=oneline;
+
+		7931adefeeb96393efcaaf1b2e2c03c6cb55ed70 忽略test.js
+		9f75b45d4a767885b5925972d0f71420624873ea 提交
+		607d3c5da6c40ba2d3748d4c2816bc173a9c539b 首次提交
+
+8.撤销上一次的修改(撤销的同时会将内容给删除掉)
+	git checkout -- 文件名称
+
+9.时光机,回溯到指定版本
+	git reset --hard 指纹信息
+
+需要注意的是,当你回溯到某一个版的时候,当前版本就会失效.
+如果你没有当前版本的指纹信息,那么久永远无法回溯到当前这个版本
+
+250c84ad34f6c9e4363b6163123cfb81ec3ca9e4 提交test.js,打印Hello
+7931adefeeb96393efcaaf1b2e2c03c6cb55ed70 忽略test.js
+9f75b45d4a767885b5925972d0f71420624873ea 提交
+607d3c5da6c40ba2d3748d4c2816bc173a9c539b 首次提交
+
+
+10.远程仓库
+	两种方式建立连接:
+	1.在本地创建git项目和远程服务器git项目,然后为本地项目添加远程服务器的git仓库地址
+		1.mkdir &cd 项目名称 
+		2.git init
+		3.touch README.md
+		4.git add *
+		5.git commit -m "提交描述"
+		6.git remote add origin git地址  //添加远程仓库的地址
+		7.git push -u origin master //推送到远程仓库
+	2.在远程服务器先建立git仓库,然后通过clone的方式将远程仓库下载到本地
+		git clone git地址
+	克隆下来的项目将会拥有远程仓库的所有历史版本信息
+
+	3.刷新仓库
+		git pull origin master
+
+11.git分支
+	1.分支的创建: git branch testing
+	2.切换分支: git checkout testing
+	3.合并分支: git merge testing,注意要回到相应的分支
+12.冲突
+	当多个开发人员修改同一个文件,并提交到远程仓库,那么就会产生冲突
+	git pull origin master
+	<<<<<<< HEAD
+	炮兵并排向北跑
+	=======
+	八百标兵奔北坡
+	>>>>>>> 69717be32df3b5b77b35c4e5d7f9a2c522d1a372
+	1.解决方式,根据需求和其他修改该文件的开发人员协商处理.
+	2.协商好之后,将相应的代码和冲突提示删除,
+	3.冲突解决之后,重新对该文件进行跟踪git add *,
+	4.git push origin master 然后重新提交即可
+
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>if</title>
+    <script src="../js/attTemplate.js"></script>
+</head>
+<body>
+    <div id="cont"></div>
+    <script type="text/html" id="type">
+        {{if status==200}}
+        <h3>成功</h3>
+        {{else}}
+        <p>请联系管理员</p>
+        {{/if}}
+
+
+        {{if readyState==4}}
+        {{if status==200}}
+        <h3>成功</h3>
+        {{else}}
+        <p>请联系管理员</p>
+        {{/if}}
+        {{elst}}
+        <p>请求没成功</p>
+        {{/if}}
+    </script>
+    <script>
+        let data = {
+            status:200,
+            readyState:4
+        }
+       let myhtml=template("type",data);
+       document.querySelector("#cont").innerHTML =myhtml;
+    </script>
+</body>
+</html>
