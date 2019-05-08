@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>过滤器</title>
+    <script src="../js/attTemplate.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <script type="text/html" id="temp">
+    	<ul>
+    		{{each info val}}
+    		<li>
+    			<span>{{val.name}}</span>
+    			<span>{{val.gender|fn}}</span>
+    		</li>
+    		{{/each}}
+    	</ul>
+    </script>
+    <script>
+		let data  = {
+			info:[
+			{name:"小花",gender:0},
+			{name:"小草",gender:1},
+			{name:"小树",gender:1},
+			{name:"小猫",gender:0},
+			{name:"小狗",gender:1},
+			]
+		}
+		//定义过滤器
+		template.defaults.imports.fn=gender=>{
+			if(gender==0){
+				return "女";
+			}else{
+				return "男"
+			}
+		}
+		myhtml = template("temp",data);
+		document.querySelector("#container").innerHTML=myhtml;
+    </script>
+</body>
+</html>
